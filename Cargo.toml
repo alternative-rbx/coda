@@ -1,0 +1,24 @@
+[package]
+name = "coda-lang"
+description = "an experimental scripting language"
+version = "0.1.0"
+edition = "2024"
+
+[workspace]
+resolver = "3"
+members = ["crates/*"]
+
+[dependencies]
+mimalloc = "0.1"
+
+[dependencies."coda-cli"]
+path = "crates/cli"
+
+[profile.release]
+codegen-units = 1
+lto = "fat"
+panic = "abort"
+strip = "symbols"
+
+[profile.dev]
+debug = false

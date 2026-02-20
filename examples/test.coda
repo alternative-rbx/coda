@@ -1,0 +1,70 @@
+// coda - an experimental scripting language
+// "kitchen sink" example
+
+// imports
+import std.math
+import std.io
+import "./test2.coda"
+
+let x = sqrt(16)
+
+print(x)
+print(testexport)
+
+// variables
+let version = "0.1.0"
+const pi = 3.14159
+
+print("version: " + version + ", pi: " + pi)
+
+// maths (including compound assignments)
+let count = 0
+count = count + 1
+count = count * 2
+count *= 2
+count /= 4
+count = count - 1
+count += 1
+
+// functions
+fn greet(user) {
+    return "hello, " + user
+}
+
+// closures
+fn closure() {
+    let num = 0
+    
+    return fn() {
+        num += 1
+        print("closure called, number: " + num)
+    }
+}
+
+let func = closure()
+
+func()
+func()
+func()
+
+// control flow
+if count > 0 {
+    print("started")
+    print(greet("test"))
+} else {
+    print("not started")
+}
+
+// while loops
+while count <= 5 {
+    print(count)
+    count += 1
+}
+
+// arrays
+let nums = [1, 2, 3, 4]
+print(nums)
+
+// nested arrays
+let nested = [1, [2, 3], 4]
+print(nested)
