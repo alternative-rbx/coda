@@ -381,7 +381,7 @@ impl Parser {
             return Err("Invalid assignment target".into());
         }
 
-        // Compound assignments
+        // compound assignments
         let compound_map = [
             (TokenKind::PlusEqual, TokenKind::Plus),
             (TokenKind::MinusEqual, TokenKind::Minus),
@@ -411,8 +411,7 @@ impl Parser {
         Ok(expr)
     }
 
-    // utilities
-
+    // utils
     #[inline(always)]
     fn match_kind(&mut self, kinds: &[TokenKind]) -> bool {
         for kind in kinds {
