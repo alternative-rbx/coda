@@ -1,6 +1,11 @@
 [package]
 name = "coda-runtime"
+description = "the runtime for coda, an experimental scripting language"
 version = "0.1.0"
+authors = ["Primiti_ve"]
+readme = "../../README.md"
+repository = "https://github.com/alternative-rbx/coda"
+license = "MIT"
 edition = "2024"
 
 [dependencies]
