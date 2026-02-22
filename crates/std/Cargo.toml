@@ -9,4 +9,4 @@ license = "MIT"
 edition = "2024"
 
 [dependencies]
-coda-runtime = { path = "../runtime" }
+coda-runtime = { path = "../runtime", version = "0.1.1" }

@@ -1,5 +1,7 @@
 set shell := ["cmd.exe", "/c"]
 
-publish:
+publish-runtime:
     cargo publish --manifest-path crates/runtime/Cargo.toml
+    
+publish-std:
     cargo publish --manifest-path crates/std/Cargo.toml
