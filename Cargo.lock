@@ -89,6 +89,7 @@ version = "0.1.0"
 dependencies = [
  "clap",
  "coda-runtime",
+ "coda-std",
  "rustyline",
 ]
 
@@ -102,7 +103,14 @@ dependencies = [
 
 [[package]]
 name = "coda-runtime"
+version = "0.1.1"
+
+[[package]]
+name = "coda-std"
 version = "0.1.0"
+dependencies = [
+ "coda-runtime",
+]
 
 [[package]]
 name = "errno"

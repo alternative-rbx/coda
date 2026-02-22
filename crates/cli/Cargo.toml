@@ -5,6 +5,7 @@ edition = "2024"
 
 [dependencies]
 coda-runtime = { path = "../runtime" }
+coda-std = { path = "../std" }
 
 [dependencies.clap]
 version = "4.5"

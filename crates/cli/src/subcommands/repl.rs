@@ -2,7 +2,9 @@ use clap::Args;
 use coda_runtime::{
     frontend::{lexer, parser},
     runtime::interpreter::Interpreter,
+    env::Env,
 };
+use coda_std::std_loader;
 use rustyline::{Editor, error::ReadlineError, history::DefaultHistory};
 
 #[derive(Args)]
@@ -11,7 +13,12 @@ pub struct Arguments {}
 impl Arguments {
     pub fn exec(self) -> Result<(), Box<dyn std::error::Error>> {
         let mut rl = Editor::<(), DefaultHistory>::new()?;
-        let mut interpreter = Interpreter::new();
+        let env = Env::new();
+        
+        let source_path = std::path::PathBuf::from(".");
+        let base_path = source_path.parent().unwrap_or(std::path::Path::new(".")).to_path_buf();
+        
+        let mut interpreter = Interpreter::new(env, base_path, Some(std_loader));
 
         println!("coda repl (type ctrl+d to exit)");
 
@@ -31,7 +38,7 @@ impl Arguments {
                     
                     match lexer::scan(&buffer).and_then(|tokens| parser::parse(tokens)) {
                         Ok(ast) => {
-                            interpreter.run(ast);
+                            interpreter.run(ast)?;
                             rl.add_history_entry(buffer.trim())?;
                             buffer.clear();
                         }

@@ -14,8 +14,9 @@ print(testexport)
 // variables
 let version = "0.1.0"
 const pi = 3.14159
+const e = 2.71828
 
-print("version: " + version + ", pi: " + pi)
+print("version: " + version + ", pi: " + pi + ", e: " + e)
 
 // maths (including compound assignments)
 let count = 0

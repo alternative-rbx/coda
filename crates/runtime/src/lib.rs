@@ -2,6 +2,5 @@
 
 pub mod frontend;
 pub mod runtime;
-pub mod std;
-
 pub mod utils;
+pub mod env;

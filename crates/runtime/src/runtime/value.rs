@@ -1,4 +1,4 @@
-use crate::runtime::{ast::Stmt, env::Env, interpreter::Interpreter};
+use crate::{runtime::{ast::Stmt, interpreter::Interpreter}, env::Env};
 use std::{cell::RefCell, rc::Rc};
 
 #[derive(Clone, Debug)]
@@ -41,7 +41,7 @@ pub struct CodaFunction {
 
 impl CodaFunction {
     pub fn call(&self, interpreter: &mut Interpreter, args: Vec<Value>) -> Value {
-        let new_env = Rc::new(RefCell::new(Env::new(Some(self.closure.clone()))));
+        let new_env = Rc::new(RefCell::new(Env::new_with_parent(Some(self.closure.clone()))));
 
         for (param, arg) in self.params.iter().zip(args) {
             new_env.borrow_mut().define(param.clone(), arg);

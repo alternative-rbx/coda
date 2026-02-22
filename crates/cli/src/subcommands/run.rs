@@ -1,8 +1,10 @@
 use clap::Args;
 use coda_runtime::{
     frontend::{lexer, parser},
-    runtime::interpreter::Interpreter,
+    runtime::{interpreter::Interpreter},
+    env::Env,
 };
+use coda_std::std_loader;
 use std::{error::Error, time::Instant};
 
 #[derive(Args)]
@@ -14,18 +16,20 @@ pub struct Arguments {
 impl Arguments {
     pub fn exec(self) -> Result<(), Box<dyn Error>> {
         let start = Instant::now();
+        let env = Env::new();
 
-        let mut interpreter = Interpreter::new();
+        let source_path = std::path::PathBuf::from(&self.file);
+        let base_path = source_path.parent().unwrap_or(std::path::Path::new(".")).to_path_buf();
+        
+        let mut interpreter = Interpreter::new(env, base_path, Some(std_loader));
+
         let source = std::fs::read_to_string(&self.file)?;
-
         let tokens = lexer::scan(&source)?;
         let ast = parser::parse(tokens)?;
 
-        interpreter.run(ast);
+        interpreter.run(ast)?;
 
-        let end = start.elapsed();
-
-        println!("execution time: {:?}", end);
+        println!("execution time: {:?}", start.elapsed());
 
         Ok(())
     }

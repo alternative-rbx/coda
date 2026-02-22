@@ -210,6 +210,7 @@ impl<'a> Lexer<'a> {
             "false" => TokenKind::False,
             "null" => TokenKind::Null,
             "import" => TokenKind::Import,
+            "export" => TokenKind::Export,
 
             _ => TokenKind::Identifier(text),
         };

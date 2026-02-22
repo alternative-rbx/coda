@@ -1,4 +1,4 @@
-use crate::runtime::{env::Env, value::Value};
+use coda_runtime::{env::Env, runtime::value::Value};
 
 pub fn register(env: &mut Env) {
     env.define("pi".to_string(), Value::Number(std::f64::consts::PI));
